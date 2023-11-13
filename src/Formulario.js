@@ -11,20 +11,26 @@ function Formulario() {
 
         const enteredEmail = event.target.value
 
-        
         if (enteredEmail.includes('@') && enteredEmail.length > 0 && enteredEmail.length <= 20) {
             
-            setEnteredEmail(event.target.value);
+            setEnteredEmail(enteredEmail);
             
             console.log('mail ok!');
             setValidateEmail(true);
-            setAlertaEmail = ""
-        } else if (enteredEmail.length > 0) {
+            setAlertaEmail("")
+
+        } else if (enteredEmail.length === 0) {
             setAlertaEmail("El email no puede estar vacío.")
-        } else if (enteredEmail.length <= 20) {
+            setValidateEmail(false);
+            console.log('mail vacío!');
+        } else if (enteredEmail.length > 20) {
             setAlertaEmail ("El email no puede contener más de 20 caracteres")
+            setValidateEmail(false);
+            console.log('mail +20 caracteres');
         } else {
             setAlertaEmail ("El email debe contener un @.")
+            setValidateEmail(false);
+            console.log('mail sin @!');
         }
     }
 
@@ -36,15 +42,23 @@ function Formulario() {
 
     function updateNombreHandler(event) {
         const enteredName = event.target.value
+        
         if (enteredName.length > 0 && enteredName.length <= 10) {
+            
             setEnteredNombre(event.target.value);
             console.log('nombre ok!');
             setValidateNombre(true);
             setAlertaNombre("")
+
         } else if (enteredName.length > 10) {
             setAlertaNombre("El nombre no puede contener más de 10 caracteres.")
+            setValidateNombre(false);
+            console.log('nombre +10 caracteres!');
+
         } else if (enteredName.length === 0) {
             setAlertaNombre("El nombre no puede estar vacío.")
+            setValidateNombre(false);
+            console.log('nombre vacío!');
         }
     }
 
@@ -54,17 +68,25 @@ function Formulario() {
     const [alertaApellido, setAlertaApellido] = useState("")
 
     function updateApellidosHandler(event) {
-        setEnteredApellido(event.target.value);
+
+        const enteredApellido = event.target.value
+
         if (enteredApellido.length > 0 && enteredApellido.length <= 20) {
             
+            setEnteredApellido(enteredApellido);
+
             console.log('apellidos ok!');
             setValidateApellido(true);
             setAlertaApellido("")
             
         } else if (enteredApellido.length === 0) {
             setAlertaApellido ("El apellido no puede estar vacío.")
+            setValidateApellido(false);
+            console.log('apellidos vacío!');
         } else {
             setAlertaApellido ("El apellido no puede contener más de 20 caracteres.")
+            setValidateApellido(false);
+            console.log('apellidos +20 caracteres!');
         }
     }
 
@@ -77,7 +99,6 @@ function Formulario() {
         
             console.log('sexo ok!');
             setValidateSexo(true);
-    
     }
 
 
@@ -87,13 +108,16 @@ function Formulario() {
     const [alertaMensaje, setAlertaMensaje] = useState("")
 
     function updateMensajeHandler(event) {
+        
         setEnteredMensaje(event.target.value);
+        
         if (enteredMensaje.length <= 500) {
             console.log('mensaje ok!');
-            setValidateMensaje(true);
-            setAlertaMensaje = ""
+            
+            setAlertaMensaje("")
         } else {
             setAlertaMensaje ("El mensaje no puede contener más de 500 caracteres.")
+            setValidateMensaje(false);
         }
     }
 
@@ -115,7 +139,9 @@ function Formulario() {
             setValidateTerminos(true);
             setAlertaTerminos("")
         } else {
-            alertaTerminos("Debe aceptar los términos y condiciones.")
+            setAlertaTerminos("Debe aceptar los términos y condiciones.")
+            setValidateTerminos(false);
+            console.log('terminos NO ok!');
         }
     }
 
@@ -124,8 +150,10 @@ function Formulario() {
         e.preventDefault();
         if (validateNombre === true && validateApellido === true && validateEmail === true && validateSexo === true && validateMensaje === true && validateTerminos === true) {
             console.log("Formulario enviado correctamente")
+            alert("FORMULARIO ENVIADO CORRECTAMENTE")
         } else{
             console.log("el formulario no se ha enviado") // TODO mostrar mensaje al usuario
+            alert("EL FORMULARIO NO SE HA PODIDO ENVIAR")
         }
     }
 
@@ -175,7 +203,7 @@ function Formulario() {
 
             <div>
                 <label>Mensaje</label><span>   </span>
-                <textarea className='textarea' type="text" onChange={updateMensajeHandler}/>
+                <textarea className='textarea' type="text" onChange={updateMensajeHandler} maxLength={500}/>
                 <p>Caracteres restantes: {500 - enteredMensaje.length}</p>
                 <p>{alertaMensaje}</p>
             </div>
