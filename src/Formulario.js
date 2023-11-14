@@ -113,7 +113,7 @@ function Formulario() {
         
         if (enteredMensaje.length <= 500) {
             console.log('mensaje ok!');
-            
+            setValidateMensaje(true)
             setAlertaMensaje("")
         } else {
             setAlertaMensaje ("El mensaje no puede contener más de 500 caracteres.")
@@ -168,7 +168,7 @@ function Formulario() {
             <div>
                 <label>Nombre</label><span>   </span>
                 <input type="text" onChange={updateNombreHandler}/>
-                <p>{alertaNombre}</p>
+                <p  className='error'>{alertaNombre}</p>
             </div>
 
             <br />
@@ -176,7 +176,7 @@ function Formulario() {
             <div>
                 <label>Apellidos</label><span>   </span>
                 <input type="text" onChange={updateApellidosHandler} />
-                <p>{alertaApellido}</p>
+                <p  className='error'>{alertaApellido}</p>
             </div>
 
             <br />
@@ -184,7 +184,7 @@ function Formulario() {
             <div>
                 <label>Email</label><span>   </span>
                 <input type="text" onChange={updateEmailHandler} />
-                <p>{alertaEmail}</p>
+                <p  className='error'>{alertaEmail}</p>
             </div>
 
             <br />
@@ -205,7 +205,7 @@ function Formulario() {
                 <label>Mensaje</label><span>   </span>
                 <textarea className='textarea' type="text" onChange={updateMensajeHandler} maxLength={500}/>
                 <p>Caracteres restantes: {500 - enteredMensaje.length}</p>
-                <p>{alertaMensaje}</p>
+                <p className='error'>{alertaMensaje}</p>
             </div>
 
             <br />
@@ -213,7 +213,7 @@ function Formulario() {
             <div>
                 <label>Aceptar términos y condiciones</label><span>   </span>
                 <input type='checkbox' value={checked} name="terminos" onChange={updateTerminosHandler}/>
-                <p>{alertaTerminos}</p>
+                <p className='error'>{alertaTerminos}</p>
             </div>
 
             <br />

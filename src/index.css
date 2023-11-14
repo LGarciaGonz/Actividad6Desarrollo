@@ -90,3 +90,9 @@ input.invalid {
   background-color: #f9f6fc;
   border: 1px solid #ccc;
 }
+
+.error {
+  display: block;
+  color: white;
+  background-color: indianred;
+}
